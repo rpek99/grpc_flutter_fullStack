@@ -9,6 +9,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  crypto: ^3.0.3
   protos:
     path: ../protos
   # path: ^1.8.0

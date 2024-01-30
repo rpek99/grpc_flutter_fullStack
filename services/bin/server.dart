@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:protos/protos.dart';
+import 'package:services/chat_service.dart';
 import 'package:services/todo_service.dart';
 
 void main(List<String> arguments) async {
   final server = Server.create(services: [
     TodoService(),
+    ChatService(),
   ]);
   final port = int.parse(Platform.environment['PORT'] ?? '8081');
   await server.serve(port: port);
