@@ -1,8 +1,6 @@
-import 'dart:math';
 
 import 'package:client/chat.dart';
 import 'package:flutter/material.dart';
-import 'package:protos/protos.dart';
 
 void main() {
   runApp(const MyApp());

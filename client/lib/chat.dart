@@ -3,9 +3,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:protos/protos.dart';
+import 'package:rxdart/rxdart.dart';
 
 class MyChatPage extends StatefulWidget {
-  const MyChatPage({super.key});
+  const MyChatPage({Key? key}) : super(key: key);
 
   @override
   State<MyChatPage> createState() => _MyChatPageState();
@@ -20,9 +21,6 @@ class _MyChatPageState extends State<MyChatPage> {
 
   late ClientChannel _channel;
   late ChatServiceClient _stub;
-  late StreamController<Message> _messageStreamController;
-  late StreamSubscription<Message> _messageSubscription;
-  late User _currentUser;
 
   @override
   void initState() {
@@ -35,25 +33,29 @@ class _MyChatPageState extends State<MyChatPage> {
       ),
     );
     _stub = ChatServiceClient(_channel);
+
     _startChatListener();
   }
 
+  @override
+  void dispose() {
+    _channel.shutdown();
+    super.dispose();
+  }
+
   void _startChatListener() async {
-    final user = User()
-      ..id = 'user_id'
-      ..name = 'User Name'; // Kullanıcı kimliği ve adını ayarlayın
+    try {
+      final stream = _stub.receiveMessages(Void());
 
-    final connect = Connect()
-      ..user = user
-      ..isActive = true;
-
-    final stream = _stub.receiveMessages(connect);
-
-    // Mesajları dinleyin ve UI'yi güncelleyin
-    await for (var message in stream) {
-      setState(() {
-        _messages.add('${message.id}: ${message.content}');
-      });
+      await for (var message in stream) {
+        setState(
+          () {
+            _messages.add('${message.user.name}: ${message.content}');
+          },
+        );
+      }
+    } catch (e, stacktrace) {
+      print('Error in _startChatListener: $e\n$stacktrace');
     }
   }
 
@@ -63,7 +65,8 @@ class _MyChatPageState extends State<MyChatPage> {
       final randomMessageId = Random().nextInt(100000);
       final user = User()
         ..id = userId
-        ..name = userName; // Kullanıcı kimliği ve adını ayarlayın
+        ..name = userName;
+
       final message = Message()
         ..id = '$randomMessageId'
         ..content = messageContent
@@ -108,10 +111,11 @@ class _MyChatPageState extends State<MyChatPage> {
                   ),
                 ),
                 IconButton(
-                    icon: const Icon(Icons.add_rounded),
-                    onPressed: () {
-                      userName = _nameController.text;
-                    }),
+                  icon: const Icon(Icons.add_rounded),
+                  onPressed: () {
+                    userName = _nameController.text;
+                  },
+                ),
               ],
             ),
           ),
@@ -128,32 +132,27 @@ class _MyChatPageState extends State<MyChatPage> {
                   ),
                 ),
                 IconButton(
-                    icon: const Icon(Icons.send),
-                    onPressed: () {
-                      if (userName.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Please enter your name first!!"),
-                          ),
-                        );
-                      } else {
-                        _sendMessage(
-                          Random().nextInt(1000).toString(),
-                          _nameController.text,
-                        );
-                      }
-                    }),
+                  icon: const Icon(Icons.send),
+                  onPressed: () {
+                    if (userName.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Please enter your name first!!"),
+                        ),
+                      );
+                    } else {
+                      _sendMessage(
+                        Random().nextInt(1000).toString(),
+                        _nameController.text,
+                      );
+                    }
+                  },
+                ),
               ],
             ),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _channel.shutdown();
-    super.dispose();
   }
 }
