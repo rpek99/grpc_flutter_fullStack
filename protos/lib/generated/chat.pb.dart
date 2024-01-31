@@ -223,13 +223,13 @@ class Connect extends $pb.GeneratedMessage {
   void clearIsActive() => clearField(2);
 }
 
-class Close extends $pb.GeneratedMessage {
-  factory Close() => create();
-  Close._() : super();
-  factory Close.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Close.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class Void extends $pb.GeneratedMessage {
+  factory Void() => create();
+  Void._() : super();
+  factory Void.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Void.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Close', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Void', createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -237,22 +237,22 @@ class Close extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Close clone() => Close()..mergeFromMessage(this);
+  Void clone() => Void()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Close copyWith(void Function(Close) updates) => super.copyWith((message) => updates(message as Close)) as Close;
+  Void copyWith(void Function(Void) updates) => super.copyWith((message) => updates(message as Void)) as Void;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Close create() => Close._();
-  Close createEmptyInstance() => create();
-  static $pb.PbList<Close> createRepeated() => $pb.PbList<Close>();
+  static Void create() => Void._();
+  Void createEmptyInstance() => create();
+  static $pb.PbList<Void> createRepeated() => $pb.PbList<Void>();
   @$core.pragma('dart2js:noInline')
-  static Close getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Close>(create);
-  static Close? _defaultInstance;
+  static Void getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Void>(create);
+  static Void? _defaultInstance;
 }
 
 

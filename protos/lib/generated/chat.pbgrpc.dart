@@ -21,14 +21,14 @@ export 'chat.pb.dart';
 
 @$pb.GrpcServiceName('ChatService')
 class ChatServiceClient extends $grpc.Client {
-  static final _$receiveMessages = $grpc.ClientMethod<$0.Connect, $0.Message>(
+  static final _$receiveMessages = $grpc.ClientMethod<$0.Void, $0.Message>(
       '/ChatService/ReceiveMessages',
-      ($0.Connect value) => value.writeToBuffer(),
+      ($0.Void value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.Message.fromBuffer(value));
-  static final _$sendMessage = $grpc.ClientMethod<$0.Message, $0.Close>(
+  static final _$sendMessage = $grpc.ClientMethod<$0.Message, $0.Void>(
       '/ChatService/SendMessage',
       ($0.Message value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $0.Close.fromBuffer(value));
+      ($core.List<$core.int> value) => $0.Void.fromBuffer(value));
 
   ChatServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -36,11 +36,11 @@ class ChatServiceClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseStream<$0.Message> receiveMessages($0.Connect request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseStream<$0.Message> receiveMessages($0.Void request, {$grpc.CallOptions? options}) {
     return $createStreamingCall(_$receiveMessages, $async.Stream.fromIterable([request]), options: options);
   }
 
-  $grpc.ResponseFuture<$0.Close> sendMessage($0.Message request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$0.Void> sendMessage($0.Message request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$sendMessage, request, options: options);
   }
 }
@@ -50,30 +50,30 @@ abstract class ChatServiceBase extends $grpc.Service {
   $core.String get $name => 'ChatService';
 
   ChatServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.Connect, $0.Message>(
+    $addMethod($grpc.ServiceMethod<$0.Void, $0.Message>(
         'ReceiveMessages',
         receiveMessages_Pre,
         false,
         true,
-        ($core.List<$core.int> value) => $0.Connect.fromBuffer(value),
+        ($core.List<$core.int> value) => $0.Void.fromBuffer(value),
         ($0.Message value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.Message, $0.Close>(
+    $addMethod($grpc.ServiceMethod<$0.Message, $0.Void>(
         'SendMessage',
         sendMessage_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.Message.fromBuffer(value),
-        ($0.Close value) => value.writeToBuffer()));
+        ($0.Void value) => value.writeToBuffer()));
   }
 
-  $async.Stream<$0.Message> receiveMessages_Pre($grpc.ServiceCall call, $async.Future<$0.Connect> request) async* {
+  $async.Stream<$0.Message> receiveMessages_Pre($grpc.ServiceCall call, $async.Future<$0.Void> request) async* {
     yield* receiveMessages(call, await request);
   }
 
-  $async.Future<$0.Close> sendMessage_Pre($grpc.ServiceCall call, $async.Future<$0.Message> request) async {
+  $async.Future<$0.Void> sendMessage_Pre($grpc.ServiceCall call, $async.Future<$0.Message> request) async {
     return sendMessage(call, await request);
   }
 
-  $async.Stream<$0.Message> receiveMessages($grpc.ServiceCall call, $0.Connect request);
-  $async.Future<$0.Close> sendMessage($grpc.ServiceCall call, $0.Message request);
+  $async.Stream<$0.Message> receiveMessages($grpc.ServiceCall call, $0.Void request);
+  $async.Future<$0.Void> sendMessage($grpc.ServiceCall call, $0.Message request);
 }

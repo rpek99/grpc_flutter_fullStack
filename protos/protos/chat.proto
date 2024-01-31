@@ -16,9 +16,10 @@ message Connect {
     bool isActive = 2;
 }
 
-message Close {}
+message Void {}
+
 
 service ChatService {
-    rpc ReceiveMessages(Connect) returns (stream Message);
-    rpc SendMessage(Message) returns (Close);
+    rpc ReceiveMessages(Void) returns (stream Message);
+    rpc SendMessage(Message) returns (Void);
 }

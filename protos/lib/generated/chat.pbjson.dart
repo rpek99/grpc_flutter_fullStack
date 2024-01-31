@@ -55,12 +55,12 @@ final $typed_data.Uint8List connectDescriptor = $convert.base64Decode(
     'CgdDb25uZWN0EhkKBHVzZXIYASABKAsyBS5Vc2VyUgR1c2VyEhoKCGlzQWN0aXZlGAIgASgIUg'
     'hpc0FjdGl2ZQ==');
 
-@$core.Deprecated('Use closeDescriptor instead')
-const Close$json = {
-  '1': 'Close',
+@$core.Deprecated('Use voidDescriptor instead')
+const Void$json = {
+  '1': 'Void',
 };
 
-/// Descriptor for `Close`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List closeDescriptor = $convert.base64Decode(
-    'CgVDbG9zZQ==');
+/// Descriptor for `Void`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List voidDescriptor = $convert.base64Decode(
+    'CgRWb2lk');
 
